@@ -1,0 +1,437 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "StalowyNajemnik Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnik Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnik Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnik Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Test",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Test",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnik Win64 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Test",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Shipping",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Shipping",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnik Win64 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnik Win64 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnik",
+				"Win64",
+				"Shipping",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnikEditor Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Debug",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnikEditor Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"DebugGame",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"StalowyNajemnikEditor Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"label": "StalowyNajemnikEditor Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"StalowyNajemnikEditor",
+				"Win64",
+				"Development",
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		}
+	]
+}

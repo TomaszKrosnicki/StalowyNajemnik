@@ -1,0 +1,152 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch StalowyNajemnik (Debug)",
+			"request": "launch",
+			"program": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Binaries\\Win64\\UnrealGame-Win64-Debug.exe",
+			"preLaunchTask": "StalowyNajemnik Win64 Debug Build",
+			"args": [
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnik (DebugGame)",
+			"request": "launch",
+			"program": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Binaries\\Win64\\UnrealGame-Win64-DebugGame.exe",
+			"preLaunchTask": "StalowyNajemnik Win64 DebugGame Build",
+			"args": [
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnik (Development)",
+			"request": "launch",
+			"program": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Binaries\\Win64\\UnrealGame.exe",
+			"preLaunchTask": "StalowyNajemnik Win64 Development Build",
+			"args": [
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnik (Test)",
+			"request": "launch",
+			"program": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Binaries\\Win64\\UnrealGame-Win64-Test.exe",
+			"preLaunchTask": "StalowyNajemnik Win64 Test Build",
+			"args": [
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnik (Shipping)",
+			"request": "launch",
+			"program": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Binaries\\Win64\\UnrealGame-Win64-Shipping.exe",
+			"preLaunchTask": "StalowyNajemnik Win64 Shipping Build",
+			"args": [
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnikEditor (Debug)",
+			"request": "launch",
+			"program": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-Debug.exe",
+			"preLaunchTask": "StalowyNajemnikEditor Win64 Debug Build",
+			"args": [
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject"
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnikEditor (DebugGame)",
+			"request": "launch",
+			"program": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-DebugGame.exe",
+			"preLaunchTask": "StalowyNajemnikEditor Win64 DebugGame Build",
+			"args": [
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject"
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Launch StalowyNajemnikEditor (Development)",
+			"request": "launch",
+			"program": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
+			"preLaunchTask": "StalowyNajemnikEditor Win64 Development Build",
+			"args": [
+				"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject"
+			],
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0",
+			"stopAtEntry": false,
+			"console": "externalTerminal",
+			"type": "cppvsdbg",
+			"visualizerFile": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+			"sourceFileMap": {
+				"D:\build\++UE5\Sync": "D:\\Program Files\\Epic Games\\UE_5.0"
+			}
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "coreclr",
+			"request": "launch",
+			"program": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Binaries\\DotNET\\UnrealBuildTool\\UnrealBuildTool",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\StalowyNajemnik.uproject",
+				"-game",
+				"-engine"
+			],
+			"console": "externalTerminal",
+			"stopAtEntry": false,
+			"cwd": "D:\\Program Files\\Epic Games\\UE_5.0"
+		}
+	]
+}
