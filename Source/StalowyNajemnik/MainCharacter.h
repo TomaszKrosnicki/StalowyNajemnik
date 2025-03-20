@@ -64,7 +64,7 @@ private:
 	float NormalMaxMS = 500.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Aim Max Speed")
-	float AimMaxMS = 250.0f;
+	float AimMaxMS = 200.0f;
 
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
