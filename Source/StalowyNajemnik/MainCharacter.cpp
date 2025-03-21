@@ -4,6 +4,7 @@
 #include "MainCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "DrawDebugHelpers.h"
+#include "Weapon.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -40,7 +41,13 @@ void AMainCharacter::BeginPlay()
 
 	CurrentCameraArmLocation = LocomotionCameraArmLocation;
 	CurrentCameraArmLenght = LocomotionCameraArmLenght;
-	
+
+	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
+	Weapon->SetActorRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
+	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponLegSocket"));
+	Weapon->SetOwner(this);
+	Weapon->SetActorRelativeLocation(LegSocketTransformOffset);
+	Weapon->SetActorRelativeRotation(LegSocketRotationOffset);
 }
 
 // Called every frame

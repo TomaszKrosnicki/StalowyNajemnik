@@ -11,6 +11,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "MainCharacter.generated.h"
 
+class AWeapon;
+
 UCLASS()
 class STALOWYNAJEMNIK_API AMainCharacter : public ACharacter
 {
@@ -65,6 +67,15 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Movement|Aim Max Speed")
 	float AimMaxMS = 200.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	TSubclassOf<AWeapon> WeaponClass;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	FVector LegSocketTransformOffset;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	FRotator LegSocketRotationOffset;
+	UPROPERTY()
+	AWeapon* Weapon;
 
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
