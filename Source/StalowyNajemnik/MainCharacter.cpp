@@ -115,7 +115,8 @@ void AMainCharacter::MoveRight(float AxisValue)
 
 void AMainCharacter::Jump()
 {
-	if (bIsAiming) { return; }
+	if (bIsAiming || GetCharacterMovement()->IsFalling()) { return; }
+	bIsJumping = true;
 	ACharacter::Jump();
 }
 
@@ -127,7 +128,7 @@ void AMainCharacter::Aim()
 void AMainCharacter::Shoot()
 {
 	if (!bIsAiming) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
+	Weapon->TriggerWeapon();
 }
 
 void AMainCharacter::StopAim()

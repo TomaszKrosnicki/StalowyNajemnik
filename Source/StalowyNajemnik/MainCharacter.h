@@ -47,6 +47,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	bool bIsAiming = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	bool bIsJumping = false;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Camera")
 	float TransitionSpeed = 1000.0f;
 

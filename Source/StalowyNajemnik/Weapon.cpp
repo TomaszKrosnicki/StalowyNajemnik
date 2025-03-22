@@ -18,6 +18,12 @@ AWeapon::AWeapon()
 
 }
 
+void AWeapon::TriggerWeapon()
+{
+	FString WeaponName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Shooting from: %s"), *WeaponName);
+}
+
 // Called when the game starts or when spawned
 void AWeapon::BeginPlay()
 {
