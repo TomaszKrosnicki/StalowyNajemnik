@@ -22,6 +22,31 @@ void AWeapon::TriggerWeapon()
 {
 	FString WeaponName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("Shooting from: %s"), *WeaponName);
+	FText DisplayEnumValue;
+	UEnum::GetDisplayValueAsText(CurrentEnergyType, DisplayEnumValue);
+	UE_LOG(LogTemp, Warning, TEXT("Current Energy Type: %s"), *DisplayEnumValue.ToString());
+}
+
+void AWeapon::SwitchCurrentEnergyType(int Value)
+{
+	SwitchEnergyInt += Value;
+	if (SwitchEnergyInt > 2) { SwitchEnergyInt = 0; }
+	if (SwitchEnergyInt < 0) { SwitchEnergyInt = 2; }
+
+	switch (SwitchEnergyInt)
+	{
+	case 0:
+		CurrentEnergyType = EEnergyType::Red;
+		break;
+	case 1:
+		CurrentEnergyType = EEnergyType::Green;
+		break;;
+	case 2:
+		CurrentEnergyType = EEnergyType::Blue;
+		break;
+	default:
+		break;
+	}
 }
 
 // Called when the game starts or when spawned

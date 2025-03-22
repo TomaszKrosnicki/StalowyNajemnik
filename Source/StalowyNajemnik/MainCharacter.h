@@ -94,6 +94,9 @@ private:
 	void Aim();
 	void Shoot();
 	void StopAim();
+	void SwitchEnergyUp();
+	void SwitchEnergyDown();
+
 	void SwitchAim(bool Aim, bool RotationToMovement, float WalkSpeed);
 	void AttachWeaponToSocket(FString SocketName, FVector TransformOffset, FRotator RotationOffset);
 	FRotator GetControllerYawRotation();

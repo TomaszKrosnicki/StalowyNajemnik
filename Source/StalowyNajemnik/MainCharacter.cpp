@@ -91,9 +91,10 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AMainCharacter::Jump);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Released, this, &ACharacter::StopJumping);
-
 	PlayerInputComponent->BindAction(TEXT("Aim"), EInputEvent::IE_Pressed, this, &AMainCharacter::Aim);
 	PlayerInputComponent->BindAction(TEXT("Aim"), EInputEvent::IE_Released, this, &AMainCharacter::StopAim);
+	PlayerInputComponent->BindAction(TEXT("SwitchEnergyUp"), EInputEvent::IE_Pressed, this, &AMainCharacter::SwitchEnergyUp);
+	PlayerInputComponent->BindAction(TEXT("SwitchEnergyDown"), EInputEvent::IE_Pressed, this, &AMainCharacter::SwitchEnergyDown);
 
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AMainCharacter::Shoot);
 
@@ -134,6 +135,16 @@ void AMainCharacter::StopAim()
 {
 	SwitchAim(false, true, NormalMaxMS);
 	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);
+}
+
+void AMainCharacter::SwitchEnergyUp()
+{
+	Weapon->SwitchCurrentEnergyType(1);
+}
+
+void AMainCharacter::SwitchEnergyDown()
+{
+	Weapon->SwitchCurrentEnergyType(-1);
 }
 
 void AMainCharacter::SwitchAim(bool Aim, bool RotationToMovement, float WalkSpeed)

@@ -6,6 +6,16 @@
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
+UENUM(BlueprintType)
+enum class EEnergyType : uint8
+{
+	Red,
+	Green,
+	Blue,
+	Count UMETA(Hidden)
+};
+ENUM_RANGE_BY_COUNT(EEnergyType, EEnergyType::Count);
+
 UCLASS()
 class STALOWYNAJEMNIK_API AWeapon : public AActor
 {
@@ -16,6 +26,7 @@ public:
 	AWeapon();
 
 	void TriggerWeapon();
+	void SwitchCurrentEnergyType(int Value);
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,6 +41,11 @@ private:
 	USceneComponent* Root;
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	EEnergyType CurrentEnergyType = EEnergyType::Red;
+
+	int SwitchEnergyInt = 0;
 	
 
 };
