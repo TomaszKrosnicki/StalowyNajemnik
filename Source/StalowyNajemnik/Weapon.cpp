@@ -2,6 +2,7 @@
 
 
 #include "Weapon.h"
+#include "Projectile.h"
 #include "Components/StaticMeshComponent.h"
 
 // Sets default values
@@ -16,15 +17,22 @@ AWeapon::AWeapon()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(Root);
 
+	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
+	ProjectileSpawnPoint->SetupAttachment(Mesh);
+
 }
 
 void AWeapon::TriggerWeapon()
 {
-	FString WeaponName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Shooting from: %s"), *WeaponName);
-	FText DisplayEnumValue;
-	UEnum::GetDisplayValueAsText(CurrentEnergyType, DisplayEnumValue);
-	UE_LOG(LogTemp, Warning, TEXT("Current Energy Type: %s"), *DisplayEnumValue.ToString());
+	//FString WeaponName = GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("Shooting from: %s"), *WeaponName);
+	//FText DisplayEnumValue;
+	//UEnum::GetDisplayValueAsText(CurrentEnergyType, DisplayEnumValue);
+	//UE_LOG(LogTemp, Warning, TEXT("Current Energy Type: %s"), *DisplayEnumValue.ToString());
+	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation);
+	//DrawDebugSphere(GetWorld(), ProjectileSpawnPointLocation, 25.f, 12, FColor::Red, false, 3.f);
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)

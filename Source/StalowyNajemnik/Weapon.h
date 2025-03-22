@@ -42,8 +42,14 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Projectile",meta = (AllowPrivateAccess = "true"))
 	EEnergyType CurrentEnergyType = EEnergyType::Red;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
+	TSubclassOf<class AProjectile> ProjectileClass;
 
 	int SwitchEnergyInt = 0;
 	
