@@ -44,10 +44,8 @@ void AMainCharacter::BeginPlay()
 
 	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
 	Weapon->SetActorRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
-	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponLegSocket"));
 	Weapon->SetOwner(this);
-	Weapon->SetActorRelativeLocation(LegSocketTransformOffset);
-	Weapon->SetActorRelativeRotation(LegSocketRotationOffset);
+	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);
 }
 
 // Called every frame
@@ -123,6 +121,7 @@ void AMainCharacter::Jump()
 void AMainCharacter::Aim()
 {
 	SwitchAim(true, false, AimMaxMS);
+	AttachWeaponToSocket(AimSocketName, AimSocketTransformOffset, AimSocketRotationOffset);
 }
 
 void AMainCharacter::Shoot()
@@ -134,6 +133,7 @@ void AMainCharacter::Shoot()
 void AMainCharacter::StopAim()
 {
 	SwitchAim(false, true, NormalMaxMS);
+	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);
 }
 
 void AMainCharacter::SwitchAim(bool Aim, bool RotationToMovement, float WalkSpeed)
@@ -141,6 +141,13 @@ void AMainCharacter::SwitchAim(bool Aim, bool RotationToMovement, float WalkSpee
 	bIsAiming = Aim;
 	GetCharacterMovement()->bOrientRotationToMovement = RotationToMovement;
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+}
+
+void AMainCharacter::AttachWeaponToSocket(FString SocketName, FVector TransformOffset, FRotator RotationOffset)
+{
+	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, *SocketName);
+	Weapon->SetActorRelativeLocation(TransformOffset);
+	Weapon->SetActorRelativeRotation(RotationOffset);
 }
 
 FRotator AMainCharacter::GetControllerYawRotation()

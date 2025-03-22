@@ -73,10 +73,18 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TSubclassOf<AWeapon> WeaponClass;
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Leg Socket")
+	FString LegSocketName;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Leg Socket")
 	FVector LegSocketTransformOffset;
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Leg Socket")
 	FRotator LegSocketRotationOffset;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Aim Socket")
+	FString AimSocketName;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Aim Socket")
+	FVector AimSocketTransformOffset;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Aim Socket")
+	FRotator AimSocketRotationOffset;
 	UPROPERTY()
 	AWeapon* Weapon;
 
@@ -87,6 +95,7 @@ private:
 	void Shoot();
 	void StopAim();
 	void SwitchAim(bool Aim, bool RotationToMovement, float WalkSpeed);
+	void AttachWeaponToSocket(FString SocketName, FVector TransformOffset, FRotator RotationOffset);
 	FRotator GetControllerYawRotation();
 	FVector CurrentCameraArmLocation;
 	float CurrentCameraArmLenght;
