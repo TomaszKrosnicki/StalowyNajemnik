@@ -32,6 +32,15 @@ AMainCharacter::AMainCharacter()
 	Camera->SetupAttachment(CameraSpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false;
 
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
+
+}
+
+void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Message from Interface implementation on: %s"), *GetName());
+	HealthComponent->TakeDamage(20.0f);
+	UE_LOG(LogTemp, Warning, TEXT("Targets current health: %f"), HealthComponent->GetCurrentHealth());
 }
 
 // Called when the game starts or when spawned

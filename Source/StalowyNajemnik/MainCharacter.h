@@ -9,18 +9,22 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "ProjectileHitInterface.h"
+#include "HealthComponent.h"
 #include "MainCharacter.generated.h"
 
 class AWeapon;
 
 UCLASS()
-class STALOWYNAJEMNIK_API AMainCharacter : public ACharacter
+class STALOWYNAJEMNIK_API AMainCharacter : public ACharacter, public IProjectileHitInterface
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
+
+	void OnProjectileHit_Implementation(AProjectile* Projectile) override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,6 +47,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Aim", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* AimLocation;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
+	UHealthComponent* HealthComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	bool bIsAiming = false;

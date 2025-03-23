@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Projectile.h"
 #include "Components/StaticMeshComponent.h"
+//#include "Kismet/GameplayStatics.h" - Potrzebne do spawnowania emiterow (efektow czasteczkowych)
 
 // Sets default values
 AWeapon::AWeapon()
@@ -24,15 +25,17 @@ AWeapon::AWeapon()
 
 void AWeapon::TriggerWeapon()
 {
-	//FString WeaponName = GetName();
-	//UE_LOG(LogTemp, Warning, TEXT("Shooting from: %s"), *WeaponName);
-	//FText DisplayEnumValue;
-	//UEnum::GetDisplayValueAsText(CurrentEnergyType, DisplayEnumValue);
-	//UE_LOG(LogTemp, Warning, TEXT("Current Energy Type: %s"), *DisplayEnumValue.ToString());
+	// TO DO:
+	// - Muzzle Flash Particle Effect
+	// - Delay między możliwymi strzałami
+	// - przerobic wyciąganie pocisków na object pooling pattern
+	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
+	// - dzwięk wystrzału
+	// UGameplayStatics::SpawnEmitterAttached(ParticleEffect, Mesh, SocketName);
+
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
 	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation);
-	//DrawDebugSphere(GetWorld(), ProjectileSpawnPointLocation, 25.f, 12, FColor::Red, false, 3.f);
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)

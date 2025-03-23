@@ -1,5 +1,15 @@
 [
 	{
+		"file": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Source\\StalowyNajemnik\\HealthComponent.cpp",
+		"command": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe\" @\"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\.vscode\\compileCommands_StalowyNajemnik\\StalowyNajemnik.211.rsp\"",
+		"directory": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Source\\StalowyNajemnik\\HealthComponent.h",
+		"command": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe\" @\"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\.vscode\\compileCommands_StalowyNajemnik\\StalowyNajemnik.211.rsp\"",
+		"directory": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
+	},
+	{
 		"file": "E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\Source\\StalowyNajemnik\\MainCharacter.cpp",
 		"command": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe\" @\"E:\\Praca dyplomowa 2025\\UE 5 Projekt\\StalowyNajemnik\\.vscode\\compileCommands_StalowyNajemnik\\StalowyNajemnik.211.rsp\"",
 		"directory": "D:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Source"
