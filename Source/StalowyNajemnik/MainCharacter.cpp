@@ -6,6 +6,7 @@
 #include "DrawDebugHelpers.h"
 #include "Projectile.h"
 #include "Weapon.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -39,9 +40,13 @@ AMainCharacter::AMainCharacter()
 
 void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Message from Interface implementation on: %s"), *GetName());
 	HealthComponent->TakeDamage(Projectile->GetParticleDamage());
-	UE_LOG(LogTemp, Warning, TEXT("Targets current health: %f"), HealthComponent->GetCurrentHealth());
+
+	if (HealthComponent->IsDead())
+	{
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -108,6 +113,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AMainCharacter::Shoot);
 
+}
+
+void AMainCharacter::AIShoot()
+{
+	Weapon->TriggerWeapon();
 }
 
 void AMainCharacter::MoveForward(float AxisValue)
