@@ -23,7 +23,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxHealth = 100.0f;
-	float Health = 0.0f;
+	float Health = 100.0f;
 
 public:	
 	// Called every frame
@@ -33,7 +33,10 @@ public:
 	void TakeDamage(float Damage);
 
 	UFUNCTION(BlueprintPure)
-	const float GetCurrentHealth();
+	float GetCurrentHealth() const;
+
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const;
 
 
 		

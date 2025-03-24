@@ -67,6 +67,7 @@ private:
 	class UTexture* EyeDeadEmission;
 
 	bool bIsClosing;
+	bool bDeathTriggered = false;
 	FTimerHandle EyesTimerHandle;
 
 	void WaitToClose();
@@ -74,5 +75,4 @@ private:
 	void Closed();
 	void Opened();
 	void Dead();
-	//bool bDeathTriggered = false;
 };

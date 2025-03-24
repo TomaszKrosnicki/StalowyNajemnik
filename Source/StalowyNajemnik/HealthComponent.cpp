@@ -34,12 +34,18 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UHealthComponent::TakeDamage(float Damage)
 {
-	Health -= Damage;
-	//UE_LOG(LogTemp, Warning, TEXT("Targets Health: %f"), Health);
+	float DamageToApply = FMath::Min(Health, Damage);
+	Health -= DamageToApply;
+	UE_LOG(LogTemp, Warning, TEXT("Targets Health: %f"), Health);
 }
 
-const float UHealthComponent::GetCurrentHealth()
+float UHealthComponent::GetCurrentHealth() const
 {
 	return Health;
+}
+
+bool UHealthComponent::IsDead() const
+{
+	return Health <= 0.0f;
 }
 

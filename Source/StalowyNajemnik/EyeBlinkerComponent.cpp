@@ -37,7 +37,7 @@ void UEyeBlinkerComponent::BeginPlay()
 	DynamicMaterial = UMaterialInstanceDynamic::Create(Material, this);
 	Mesh->SetMaterial(MaterialIndex, DynamicMaterial);
 	bIsClosing = true;
-	//bDeathTriggered = false;
+	bDeathTriggered = false;
 	WaitToClose();
 	
 }
@@ -86,7 +86,7 @@ void UEyeBlinkerComponent::Dead()
 	GetWorld()->GetTimerManager().ClearTimer(EyesTimerHandle);
 	DynamicMaterial->SetTextureParameterValue(TEXT("Color"), EyeDeadColor);
 	DynamicMaterial->SetTextureParameterValue(TEXT("Emission"), EyeDeadEmission);
-	//bDeathTriggered = true;
+	bDeathTriggered = true;
 }
 
 // Called every frame
@@ -94,9 +94,9 @@ void UEyeBlinkerComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	/* if(bDeathTriggered) { return; }
+	if(bDeathTriggered) { return; }
 	if(HealthComp->IsDead())
 	{
 		Dead();
-	} */
+	}
 }

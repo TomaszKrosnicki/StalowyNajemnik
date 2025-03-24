@@ -4,6 +4,7 @@
 #include "MainCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "DrawDebugHelpers.h"
+#include "Projectile.h"
 #include "Weapon.h"
 
 // Sets default values
@@ -39,7 +40,7 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Message from Interface implementation on: %s"), *GetName());
-	HealthComponent->TakeDamage(20.0f);
+	HealthComponent->TakeDamage(Projectile->GetParticleDamage());
 	UE_LOG(LogTemp, Warning, TEXT("Targets current health: %f"), HealthComponent->GetCurrentHealth());
 }
 

@@ -35,6 +35,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Impact")
 	UNiagaraSystem* ParticleImpact;
 
+	UPROPERTY(EditAnywhere, Category = "Damage")
+	float Damage = 20.0f;
+
 	UFUNCTION()
 	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -42,4 +45,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintPure)
+	float GetParticleDamage() const;
 };
