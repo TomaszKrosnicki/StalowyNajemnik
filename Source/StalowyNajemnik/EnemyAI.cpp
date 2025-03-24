@@ -2,6 +2,7 @@
 
 
 #include "EnemyAI.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -9,7 +10,17 @@ void AEnemyAI::BeginPlay()
 {
     Super::BeginPlay();
 
-    GetPawn()->bUseControllerRotationYaw = true;
+    APawn* AIPawn = GetPawn();
+    AIPawn->bUseControllerRotationYaw = true;
+
+    if(AIBehavior != nullptr)
+    {
+        RunBehaviorTree(AIBehavior);
+
+        APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+        
+        GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), AIPawn->GetActorLocation());
+    }
     
 }
 
@@ -22,13 +33,16 @@ void AEnemyAI::Tick(float DeltaSeconds)
 
     if (LineOfSightTo(PlayerPawn))
     {
-        SetFocus(PlayerPawn);
-        MoveToActor(PlayerPawn, AcceptanceRadius);
+        //SetFocus(PlayerPawn);
+        //MoveToActor(PlayerPawn, AcceptanceRadius);
+        GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
+        GetBlackboardComponent()->SetValueAsVector(TEXT("LastKnownPlayerLocation"), PlayerPawn->GetActorLocation());
     }
     else
     {
-        ClearFocus(EAIFocusPriority::Gameplay);
-        StopMovement();
+        //ClearFocus(EAIFocusPriority::Gameplay);
+        //StopMovement();
+        GetBlackboardComponent()->ClearValue(TEXT("PlayerLocation"));
     }
     
 }
