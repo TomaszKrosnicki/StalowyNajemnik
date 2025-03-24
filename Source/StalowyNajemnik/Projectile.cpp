@@ -11,13 +11,14 @@ AProjectile::AProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile Mesh"));
-	RootComponent = ProjectileMesh;
+	ProjectileCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Projectile Collider"));
+	RootComponent = ProjectileCollider;
 
-	ProjectileMesh->SetGenerateOverlapEvents(true);
-    ProjectileMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-    ProjectileMesh->SetCollisionObjectType(ECC_WorldDynamic);
-    ProjectileMesh->SetCollisionResponseToAllChannels(ECR_Overlap);
+	ProjectileCollider->InitSphereRadius(20.0f);
+	ProjectileCollider->SetGenerateOverlapEvents(true);
+    ProjectileCollider->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    ProjectileCollider->SetCollisionObjectType(ECC_WorldDynamic);
+    ProjectileCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
 	ProjectileMovementComponent->MaxSpeed = 2000.f;
@@ -29,7 +30,7 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ProjectileMesh->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
+	ProjectileCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
 }
 
 // Called every frame
@@ -47,6 +48,8 @@ void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedCompon
 			IProjectileHitInterface::Execute_OnProjectileHit(OtherActor, this);
 		}
 	}
+
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), ParticleImpact, SweepResult.Location, FRotator(0.0f));
 	
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);

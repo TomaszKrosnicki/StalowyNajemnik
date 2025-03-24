@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Weapon.h"
+#include "Components/SphereComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -21,14 +23,17 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "Mesh")
-	UStaticMeshComponent* ProjectileMesh;
+	UPROPERTY(EditDefaultsOnly, Category = "Sphere Collider")
+	USphereComponent* ProjectileCollider;
 
 	UPROPERTY(EditDefaultsOnly, Category = "EnergyType")
 	EEnergyType ProjectileEnergyType;
 
 	UPROPERTY(VisibleAnywhere)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Impact")
+	UNiagaraSystem* ParticleImpact;
 
 	UFUNCTION()
 	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

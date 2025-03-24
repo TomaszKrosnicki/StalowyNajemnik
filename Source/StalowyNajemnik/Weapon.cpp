@@ -35,6 +35,7 @@ void AWeapon::TriggerWeapon()
 
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), MuzzleEffect, Location, Rotation);
 	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation);
 }
 

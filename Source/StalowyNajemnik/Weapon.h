@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Weapon.generated.h"
 
 UENUM(BlueprintType)
@@ -50,6 +51,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class AProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle")
+	UNiagaraSystem* MuzzleEffect;
 
 	int SwitchEnergyInt = 0;
 	
