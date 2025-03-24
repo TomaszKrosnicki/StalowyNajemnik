@@ -68,6 +68,11 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
+
 	if (bIsAiming && GetCharacterMovement()->IsFalling())
 	{
 		StopAim();
@@ -122,12 +127,20 @@ void AMainCharacter::AIShoot()
 
 void AMainCharacter::MoveForward(float AxisValue)
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
 	FVector Direction = FRotationMatrix(GetControllerYawRotation()).GetUnitAxis(EAxis::X);
 	AddMovementInput(Direction, AxisValue);
 }
 
 void AMainCharacter::MoveRight(float AxisValue)
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
 	FVector Direction = FRotationMatrix(GetControllerYawRotation()).GetUnitAxis(EAxis::Y);
 	AddMovementInput(Direction, AxisValue);
 }
