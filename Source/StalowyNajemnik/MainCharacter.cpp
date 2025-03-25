@@ -6,6 +6,7 @@
 #include "DrawDebugHelpers.h"
 #include "Projectile.h"
 #include "Weapon.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -44,6 +45,7 @@ void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 
 	if (HealthComponent->IsDead())
 	{
+		if (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0)) { return; }
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
@@ -147,6 +149,11 @@ void AMainCharacter::MoveRight(float AxisValue)
 
 void AMainCharacter::Jump()
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
+
 	if (bIsAiming || GetCharacterMovement()->IsFalling()) { return; }
 	bIsJumping = true;
 	ACharacter::Jump();
@@ -154,18 +161,33 @@ void AMainCharacter::Jump()
 
 void AMainCharacter::Aim()
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
+
 	SwitchAim(true, false, AimMaxMS);
 	AttachWeaponToSocket(AimSocketName, AimSocketTransformOffset, AimSocketRotationOffset);
 }
 
 void AMainCharacter::Shoot()
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
+
 	if (!bIsAiming) { return; }
 	Weapon->TriggerWeapon();
 }
 
 void AMainCharacter::StopAim()
 {
+	if(HealthComponent->IsDead())
+	{
+		return;
+	}
+	
 	SwitchAim(false, true, NormalMaxMS);
 	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);
 }

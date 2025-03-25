@@ -31,11 +31,23 @@ void UBTService_PlayerLocationIfSeen::TickNode(UBehaviorTreeComponent& OwnerComp
 
     if (OwnerComp.GetAIOwner()->LineOfSightTo(PlayerPawn))
     {
-        OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerPawn->GetActorLocation());
+        OwnerComp.GetBlackboardComponent()->SetValueAsObject(GetSelectedBlackboardKey(), PlayerPawn);
+        OwnerComp.GetBlackboardComponent()->SetValueAsBool(TEXT("IsPlayerSeen"), true);
+        AActor* Enemy = OwnerComp.GetOwner();
+        if (FVector::Distance(Enemy->GetActorLocation(), PlayerPawn->GetActorLocation()) <= 600.0f)
+        {
+            OwnerComp.GetBlackboardComponent()->SetValueAsBool(TEXT("IsPlayerInRange"), true);
+        }
+        else
+        {
+            OwnerComp.GetBlackboardComponent()->ClearValue(TEXT("IsPlayerInRange"));
+        }
     }
     else
     {
         OwnerComp.GetBlackboardComponent()->ClearValue(GetSelectedBlackboardKey());
+        OwnerComp.GetBlackboardComponent()->SetValueAsBool(TEXT("IsPlayerSeen"), false);
+        OwnerComp.GetBlackboardComponent()->ClearValue(TEXT("IsPlayerInRange"));
     }
     
 }

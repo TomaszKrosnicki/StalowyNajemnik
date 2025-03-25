@@ -22,6 +22,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void IgnoreOwnerCollision();
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sphere Collider")
 	USphereComponent* ProjectileCollider;

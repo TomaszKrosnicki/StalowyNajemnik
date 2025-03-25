@@ -31,6 +31,16 @@ void AProjectile::BeginPlay()
 	Super::BeginPlay();
 
 	ProjectileCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
+	IgnoreOwnerCollision();
+}
+
+void AProjectile::IgnoreOwnerCollision()
+{
+	AActor* OwnerActor = GetOwner();
+	if (OwnerActor != nullptr)
+	{
+		ProjectileCollider->IgnoreActorWhenMoving(OwnerActor, true);
+	}
 }
 
 // Called every frame

@@ -32,11 +32,14 @@ void AWeapon::TriggerWeapon()
 	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
 	// - dzwięk wystrzału
 	// UGameplayStatics::SpawnEmitterAttached(ParticleEffect, Mesh, SocketName);
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = GetOwner();
 
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
-	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), MuzzleEffect, Location, Rotation);
-	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation);
+	UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
+		EAttachLocation::KeepRelativeOffset, true);
+	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation, SpawnParams);
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)
