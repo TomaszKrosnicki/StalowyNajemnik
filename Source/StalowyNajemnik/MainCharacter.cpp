@@ -45,7 +45,11 @@ void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 
 	if (HealthComponent->IsDead())
 	{
-		if (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0)) { return; }
+		if (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
+		{
+			PlayerController->RemoveCrosshair();
+			return;
+		}
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
@@ -58,6 +62,8 @@ void AMainCharacter::BeginPlay()
 
 	CurrentCameraArmLocation = LocomotionCameraArmLocation;
 	CurrentCameraArmLenght = LocomotionCameraArmLenght;
+
+	PlayerController = Cast<APlatformerPlayerController>(GetController());
 
 	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
 	Weapon->SetActorRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
@@ -166,6 +172,9 @@ void AMainCharacter::Aim()
 		return;
 	}
 
+	if (PlayerController == nullptr) return;
+	PlayerController->CreateCrosshair();
+
 	SwitchAim(true, false, AimMaxMS);
 	AttachWeaponToSocket(AimSocketName, AimSocketTransformOffset, AimSocketRotationOffset);
 }
@@ -187,6 +196,9 @@ void AMainCharacter::StopAim()
 	{
 		return;
 	}
+
+	if (PlayerController == nullptr) return;
+	PlayerController->RemoveCrosshair();
 	
 	SwitchAim(false, true, NormalMaxMS);
 	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);

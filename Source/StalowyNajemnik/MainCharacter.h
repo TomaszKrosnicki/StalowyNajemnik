@@ -11,6 +11,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "ProjectileHitInterface.h"
 #include "HealthComponent.h"
+#include "PlatformerPlayerController.h"
 #include "MainCharacter.generated.h"
 
 class AWeapon;
@@ -96,7 +97,9 @@ private:
 	FRotator AimSocketRotationOffset;
 	UPROPERTY()
 	AWeapon* Weapon;
-
+	UPROPERTY()
+	APlatformerPlayerController* PlayerController;
+	
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 	void Jump();

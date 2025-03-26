@@ -26,12 +26,12 @@ AWeapon::AWeapon()
 void AWeapon::TriggerWeapon()
 {
 	// TO DO:
-	// - Muzzle Flash Particle Effect
+	// - Muzzle Flash Particle Effect xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	// - Delay między możliwymi strzałami
 	// - przerobic wyciąganie pocisków na object pooling pattern
 	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
 	// - dzwięk wystrzału
-	// UGameplayStatics::SpawnEmitterAttached(ParticleEffect, Mesh, SocketName);
+	
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = GetOwner();
 

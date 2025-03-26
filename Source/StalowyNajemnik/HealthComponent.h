@@ -36,6 +36,9 @@ public:
 	float GetCurrentHealth() const;
 
 	UFUNCTION(BlueprintPure)
+	float GetCurrentHealthPercent() const;
+
+	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
 
 
