@@ -35,7 +35,10 @@ private:
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
 	UPROPERTY(EditAnywhere, Category = "Impact")
-	UNiagaraSystem* ParticleImpact;
+	UNiagaraSystem* ImpactParticle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Impact")
+	USoundBase* ImpactSound;
 
 	UPROPERTY(EditAnywhere, Category = "Damage")
 	float Damage = 20.0f;

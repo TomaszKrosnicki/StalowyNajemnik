@@ -55,6 +55,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Muzzle")
 	UNiagaraSystem* MuzzleEffect;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle")
+	USoundBase* MuzzleSound;
+
 	int SwitchEnergyInt = 0;
 	
 

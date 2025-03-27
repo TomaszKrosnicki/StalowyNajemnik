@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "ProjectileHitInterface.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -64,7 +65,8 @@ void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedCompon
 		}
 	}
 
-	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), ParticleImpact, SweepResult.Location, FRotator(0.0f));
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), ImpactParticle, SweepResult.Location, FRotator::ZeroRotator);
+	UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ImpactSound, SweepResult.Location, FRotator::ZeroRotator);
 	
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);

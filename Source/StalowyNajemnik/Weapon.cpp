@@ -4,7 +4,7 @@
 #include "Weapon.h"
 #include "Projectile.h"
 #include "Components/StaticMeshComponent.h"
-//#include "Kismet/GameplayStatics.h" - Potrzebne do spawnowania emiterow (efektow czasteczkowych)
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AWeapon::AWeapon()
@@ -39,6 +39,7 @@ void AWeapon::TriggerWeapon()
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
 	UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
 		EAttachLocation::KeepRelativeOffset, true);
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
 	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation, SpawnParams);
 }
 
