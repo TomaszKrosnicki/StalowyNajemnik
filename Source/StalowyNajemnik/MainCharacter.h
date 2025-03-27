@@ -95,6 +95,8 @@ private:
 	FVector AimSocketTransformOffset;
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon|Aim Socket")
 	FRotator AimSocketRotationOffset;
+	UPROPERTY(EditAnywhere, Category = "CameraShake")
+	TSubclassOf<class UCameraShakeBase> CameraShakeClass;
 	UPROPERTY()
 	AWeapon* Weapon;
 	UPROPERTY()

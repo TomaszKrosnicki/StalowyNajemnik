@@ -8,6 +8,7 @@
 #include "Weapon.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
+#include "Camera/CameraShakeBase.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter()
@@ -42,6 +43,11 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 {
 	HealthComponent->TakeDamage(Projectile->GetParticleDamage());
+
+	if (CameraShakeClass != nullptr && !HealthComponent->IsDead() && (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0)))
+	{
+		PlayerController->ClientStartCameraShake(CameraShakeClass);
+	}
 
 	if (HealthComponent->IsDead())
 	{
@@ -188,6 +194,10 @@ void AMainCharacter::Shoot()
 
 	if (!bIsAiming) { return; }
 	Weapon->TriggerWeapon();
+	if (CameraShakeClass != nullptr)
+	{
+		PlayerController->ClientStartCameraShake(CameraShakeClass);
+	}
 }
 
 void AMainCharacter::StopAim()
