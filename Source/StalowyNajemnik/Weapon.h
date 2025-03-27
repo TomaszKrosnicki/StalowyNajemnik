@@ -51,24 +51,56 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Starting")
+	EEnergyType StartingEnergyType = EEnergyType::Red;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Red")
 	TSubclassOf<AProjectile> RedProjectileClass;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Green")
+	TSubclassOf<AProjectile> GreenProjectileClass;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Blue")
+	TSubclassOf<AProjectile> BlueProjectileClass;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Red")
 	int RedProjectileAmount = 10;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Green")
+	int GreenProjectileAmount = 10;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Blue")
+	int BlueProjectileAmount = 10;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Red")
 	UNiagaraSystem* RedMuzzleEffect;
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Green")
+	UNiagaraSystem* GreenMuzzleEffect;
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Blue")
+	UNiagaraSystem* BlueMuzzleEffect;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Sound")
 	USoundBase* MuzzleSound;
 
 	UPROPERTY(EditAnywhere, Category = "Projectile | Red | Pool")
 	TArray<AProjectile*> RedProjectilePool;
+	UPROPERTY(EditAnywhere, Category = "Projectile | Green | Pool")
+	TArray<AProjectile*> GreenProjectilePool;
+	UPROPERTY(EditAnywhere, Category = "Projectile | Blue | Pool")
+	TArray<AProjectile*> BlueProjectilePool;
+
+	UPROPERTY(EditAnywhere)
+	float ShootingDelay = 0.5f;
+
+	FTimerHandle ShootingTimer;
+
+	bool bCanShoot = true;
 
 	int SwitchEnergyInt = 0;
 
+	void ResetCanShoot();
+
+	void ActivateProjectileFromPool(TArray<AProjectile*>& PoolArray, UNiagaraSystem* MuzzleEffect);
+
 	void InitializeRedPool();
+	void InitializeGreenPool();
+	void InitializeBluePool();
 
 
 };

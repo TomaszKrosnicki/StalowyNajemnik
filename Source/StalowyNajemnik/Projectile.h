@@ -56,10 +56,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintCallable)
 	float GetProjectileDamage() const;
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintCallable)
 	EEnergyType GetProjectileEnergyType() const;
 
 	UFUNCTION(BlueprintCallable)

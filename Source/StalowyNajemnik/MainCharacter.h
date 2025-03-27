@@ -25,7 +25,7 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
-	void OnProjectileHit_Implementation(AProjectile* Projectile) override;
+	void OnProjectileHit_Implementation(AProjectile* Projectile, EEnergyType ProjectileEnergyType, float Damage) override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -39,6 +39,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void AIShoot();
+	UFUNCTION(BlueprintPure)
+	AWeapon* GetWeapon() const;
 
 private:
 

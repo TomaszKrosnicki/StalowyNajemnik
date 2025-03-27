@@ -7,6 +7,7 @@
 #include "ProjectileHitInterface.generated.h"
 
 class AProjectile;
+class AWeapon;
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, Blueprintable)
@@ -26,5 +27,5 @@ class STALOWYNAJEMNIK_API IProjectileHitInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, Category = Projectile)
-	void OnProjectileHit(AProjectile* Projectile);
+	void OnProjectileHit(AProjectile* Projectile, EEnergyType ProjectileEnergyType, float Damage);
 };

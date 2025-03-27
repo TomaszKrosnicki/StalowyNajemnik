@@ -40,9 +40,9 @@ AMainCharacter::AMainCharacter()
 
 }
 
-void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
+void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile, EEnergyType ProjectileEnergyType, float Damage)
 {
-	HealthComponent->TakeDamage(Projectile->GetProjectileDamage());
+	HealthComponent->TakeDamage(Damage);
 
 	if (CameraShakeClass != nullptr && !HealthComponent->IsDead() && (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0)))
 	{
@@ -137,6 +137,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void AMainCharacter::AIShoot()
 {
 	Weapon->TriggerWeapon();
+}
+
+AWeapon* AMainCharacter::GetWeapon() const
+{
+	return Weapon;
 }
 
 void AMainCharacter::MoveForward(float AxisValue)

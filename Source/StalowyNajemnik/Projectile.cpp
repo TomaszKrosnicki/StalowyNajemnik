@@ -94,7 +94,7 @@ void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedCompon
 	{
 		if (OtherActor->GetClass()->ImplementsInterface(UProjectileHitInterface::StaticClass()))
 		{
-			IProjectileHitInterface::Execute_OnProjectileHit(OtherActor, this);
+			IProjectileHitInterface::Execute_OnProjectileHit(OtherActor, this, ProjectileEnergyType, Damage);
 		}
 	}
 

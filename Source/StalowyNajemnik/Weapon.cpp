@@ -28,24 +28,29 @@ void AWeapon::TriggerWeapon()
 {
 	// TO DO:
 	// - Muzzle Flash Particle Effect xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	// - Delay między możliwymi strzałami
-	// - przerobic wyciąganie pocisków na object pooling pattern
+	// - Delay między możliwymi strzałami xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	// - przerobic wyciąganie pocisków na object pooling pattern xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
 	// - dzwięk wystrzału xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
-	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
-	FVector Direction = UKismetMathLibrary::GetForwardVector(Rotation);
+	if (bCanShoot == false) { return; }
+	bCanShoot = false;
+	GetWorldTimerManager().SetTimer(ShootingTimer, this, &AWeapon::ResetCanShoot, ShootingDelay);
 
-	for (AProjectile* Projectile : RedProjectilePool)
+	switch (CurrentEnergyType)
 	{
-		if (Projectile->GetInUse()) { continue; }
-		Projectile->ActivateProjectileAtLocation(Location, Rotation, Direction);
-
-		UNiagaraFunctionLibrary::SpawnSystemAttached(RedMuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
-			EAttachLocation::KeepRelativeOffset, true);
-		UGameplayStatics::SpawnSoundAttached(MuzzleSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
+	case EEnergyType::Red:
+		ActivateProjectileFromPool(RedProjectilePool, RedMuzzleEffect);
+		break;
+	case EEnergyType::Green:
+		ActivateProjectileFromPool(GreenProjectilePool, GreenMuzzleEffect);
+		break;
+	case EEnergyType::Blue:
+		ActivateProjectileFromPool(BlueProjectilePool, BlueMuzzleEffect);
+		break;
+	default:
 		break;
 	}
+	
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)
@@ -75,8 +80,11 @@ void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CurrentEnergyType = StartingEnergyType;
+
 	InitializeRedPool();
-	
+	InitializeGreenPool();
+	InitializeBluePool();
 }
 
 // Called every frame
@@ -86,8 +94,32 @@ void AWeapon::Tick(float DeltaTime)
 
 }
 
+void AWeapon::ResetCanShoot()
+{
+	bCanShoot = true;
+	GetWorldTimerManager().ClearTimer(ShootingTimer);
+}
+
+void AWeapon::ActivateProjectileFromPool(TArray<AProjectile*>& PoolArray, UNiagaraSystem* MuzzleEffect)
+{
+	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+	FVector Direction = UKismetMathLibrary::GetForwardVector(Rotation);
+
+	for (AProjectile* Projectile : PoolArray)
+	{
+		if (Projectile->GetInUse()) { continue; }
+		Projectile->ActivateProjectileAtLocation(Location, Rotation, Direction);
+		UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
+			EAttachLocation::KeepRelativeOffset, true);
+		UGameplayStatics::SpawnSoundAttached(MuzzleSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
+		break;
+	}
+}
+
 void AWeapon::InitializeRedPool()
 {
+	if (RedProjectileAmount <= 0) { return; }
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = GetOwner();
 
@@ -97,6 +129,38 @@ void AWeapon::InitializeRedPool()
 		if (Projectile != nullptr)
 		{
 			RedProjectilePool.Add(Projectile);
+		}
+	}
+}
+
+void AWeapon::InitializeGreenPool()
+{
+	if (GreenProjectileAmount <= 0) { return; }
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = GetOwner();
+
+	for (int i = 0; i < GreenProjectileAmount; i++)
+	{
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(GreenProjectileClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+		if (Projectile != nullptr)
+		{
+			GreenProjectilePool.Add(Projectile);
+		}
+	}
+}
+
+void AWeapon::InitializeBluePool()
+{
+	if (BlueProjectileAmount <= 0) { return; }
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = GetOwner();
+
+	for (int i = 0; i < BlueProjectileAmount; i++)
+	{
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(BlueProjectileClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+		if (Projectile != nullptr)
+		{
+			BlueProjectilePool.Add(Projectile);
 		}
 	}
 }
