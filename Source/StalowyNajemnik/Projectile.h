@@ -43,6 +43,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Damage")
 	float Damage = 20.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Damage")
+	float Speed = 3000.0f;
+
+	UPROPERTY(VisibleAnywhere)
+	bool bInUse = false;
+
 	UFUNCTION()
 	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -51,5 +57,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintPure)
-	float GetParticleDamage() const;
+	float GetProjectileDamage() const;
+
+	UFUNCTION(BlueprintPure)
+	EEnergyType GetProjectileEnergyType() const;
+
+	UFUNCTION(BlueprintCallable)
+	void ActivateProjectileAtLocation(FVector SpawnLocation, FRotator SpawnRotation, FVector MovementDirection);
+
+	UFUNCTION(BlueprintCallable)
+	void DeactivateProjectile();
+
+	UFUNCTION(BlueprintCallable)
+	bool GetInUse() const;
 };

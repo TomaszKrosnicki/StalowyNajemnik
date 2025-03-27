@@ -22,8 +22,8 @@ AProjectile::AProjectile()
     ProjectileCollider->SetCollisionResponseToAllChannels(ECR_Overlap);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement Component"));
-	ProjectileMovementComponent->MaxSpeed = 2000.f;
-	ProjectileMovementComponent->InitialSpeed = 2000.f;
+	ProjectileMovementComponent->MaxSpeed = 3000.f;
+	ProjectileMovementComponent->InitialSpeed = 3000.f;
 }
 
 // Called when the game starts or when spawned
@@ -33,6 +33,9 @@ void AProjectile::BeginPlay()
 
 	ProjectileCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
 	IgnoreOwnerCollision();
+	ProjectileMovementComponent->MaxSpeed = Speed;
+	ProjectileMovementComponent->InitialSpeed = Speed;
+	DeactivateProjectile();
 }
 
 void AProjectile::IgnoreOwnerCollision()
@@ -50,9 +53,39 @@ void AProjectile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-float AProjectile::GetParticleDamage() const
+float AProjectile::GetProjectileDamage() const
 {
 	return Damage;
+}
+
+EEnergyType AProjectile::GetProjectileEnergyType() const
+{
+	return ProjectileEnergyType;
+}
+
+void AProjectile::ActivateProjectileAtLocation(FVector SpawnLocation, FRotator SpawnRotation, FVector MovementDirection)
+{
+	bInUse = true;
+	SetActorLocation(SpawnLocation);
+	SetActorRotation(SpawnRotation);
+	SetActorHiddenInGame(false);
+	SetActorEnableCollision(true);
+	SetActorTickEnabled(true);
+	ProjectileMovementComponent->Velocity = MovementDirection * Speed;
+}
+
+void AProjectile::DeactivateProjectile()
+{
+	bInUse = false;
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+	SetActorTickEnabled(false);
+	ProjectileMovementComponent->Velocity = FVector::ZeroVector;
+}
+
+bool AProjectile::GetInUse() const
+{
+	return bInUse;
 }
 
 void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -68,7 +101,5 @@ void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedCompon
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), ImpactParticle, SweepResult.Location, FRotator::ZeroRotator);
 	UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ImpactSound, SweepResult.Location, FRotator::ZeroRotator);
 	
-	SetActorHiddenInGame(true);
-	SetActorEnableCollision(false);
-	SetActorTickEnabled(false);
+	DeactivateProjectile();
 }

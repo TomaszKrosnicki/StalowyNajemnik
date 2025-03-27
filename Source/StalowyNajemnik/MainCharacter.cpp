@@ -42,7 +42,7 @@ AMainCharacter::AMainCharacter()
 
 void AMainCharacter::OnProjectileHit_Implementation(AProjectile* Projectile)
 {
-	HealthComponent->TakeDamage(Projectile->GetParticleDamage());
+	HealthComponent->TakeDamage(Projectile->GetProjectileDamage());
 
 	if (CameraShakeClass != nullptr && !HealthComponent->IsDead() && (this == UGameplayStatics::GetPlayerPawn(GetWorld(), 0)))
 	{

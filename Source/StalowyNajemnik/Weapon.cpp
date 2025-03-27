@@ -5,6 +5,7 @@
 #include "Projectile.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 // Sets default values
 AWeapon::AWeapon()
@@ -30,17 +31,21 @@ void AWeapon::TriggerWeapon()
 	// - Delay między możliwymi strzałami
 	// - przerobic wyciąganie pocisków na object pooling pattern
 	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
-	// - dzwięk wystrzału
-	
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = GetOwner();
-
+	// - dzwięk wystrzału xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
-	UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
-		EAttachLocation::KeepRelativeOffset, true);
-	UGameplayStatics::SpawnSoundAttached(MuzzleSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
-	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotation, SpawnParams);
+	FVector Direction = UKismetMathLibrary::GetForwardVector(Rotation);
+
+	for (AProjectile* Projectile : RedProjectilePool)
+	{
+		if (Projectile->GetInUse()) { continue; }
+		Projectile->ActivateProjectileAtLocation(Location, Rotation, Direction);
+
+		UNiagaraFunctionLibrary::SpawnSystemAttached(RedMuzzleEffect, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
+			EAttachLocation::KeepRelativeOffset, true);
+		UGameplayStatics::SpawnSoundAttached(MuzzleSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
+		break;
+	}
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)
@@ -69,6 +74,8 @@ void AWeapon::SwitchCurrentEnergyType(int Value)
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InitializeRedPool();
 	
 }
 
@@ -77,5 +84,20 @@ void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AWeapon::InitializeRedPool()
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = GetOwner();
+
+	for (int i = 0; i < RedProjectileAmount; i++)
+	{
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(RedProjectileClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+		if (Projectile != nullptr)
+		{
+			RedProjectilePool.Add(Projectile);
+		}
+	}
 }
 

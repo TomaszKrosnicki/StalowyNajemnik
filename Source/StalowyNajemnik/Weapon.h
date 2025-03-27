@@ -7,6 +7,8 @@
 #include "NiagaraFunctionLibrary.h"
 #include "Weapon.generated.h"
 
+class AProjectile;
+
 UENUM(BlueprintType)
 enum class EEnergyType : uint8
 {
@@ -49,16 +51,24 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Projectile", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
-	TSubclassOf<class AProjectile> ProjectileClass;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Red")
+	TSubclassOf<AProjectile> RedProjectileClass;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Muzzle")
-	UNiagaraSystem* MuzzleEffect;
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile | Red")
+	int RedProjectileAmount = 10;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Muzzle")
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Red")
+	UNiagaraSystem* RedMuzzleEffect;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Sound")
 	USoundBase* MuzzleSound;
 
+	UPROPERTY(EditAnywhere, Category = "Projectile | Red | Pool")
+	TArray<AProjectile*> RedProjectilePool;
+
 	int SwitchEnergyInt = 0;
-	
+
+	void InitializeRedPool();
+
 
 };
