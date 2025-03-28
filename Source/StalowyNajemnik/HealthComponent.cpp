@@ -39,6 +39,13 @@ void UHealthComponent::TakeDamage(float Damage)
 	UE_LOG(LogTemp, Warning, TEXT("Targets Health: %f"), Health);
 }
 
+void UHealthComponent::AddHealth(float HealAmount)
+{
+	Health += HealAmount;
+	Health = FMath::Min(MaxHealth, Health);
+	UE_LOG(LogTemp, Warning, TEXT("Targets Health: %f"), Health);
+}
+
 float UHealthComponent::GetCurrentHealth() const
 {
 	return Health;

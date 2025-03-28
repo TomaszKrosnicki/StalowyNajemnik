@@ -30,6 +30,8 @@ public:
 
 	void TriggerWeapon();
 	void SwitchCurrentEnergyType(int Value);
+	UFUNCTION(BlueprintPure)
+	bool GetCanShoot() const;
 
 protected:
 	// Called when the game starts or when spawned
@@ -77,6 +79,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Muzzle | Sound")
 	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Switch Sound")
+	USoundBase* SwitchSound;
 
 	UPROPERTY(EditAnywhere, Category = "Projectile | Red | Pool")
 	TArray<AProjectile*> RedProjectilePool;

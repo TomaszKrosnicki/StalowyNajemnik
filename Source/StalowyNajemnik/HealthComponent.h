@@ -32,6 +32,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TakeDamage(float Damage);
 
+	UFUNCTION(BlueprintCallable)
+	void AddHealth(float HealAmount);
+
 	UFUNCTION(BlueprintPure)
 	float GetCurrentHealth() const;
 

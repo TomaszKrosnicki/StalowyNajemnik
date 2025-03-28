@@ -192,7 +192,7 @@ void AMainCharacter::Aim()
 
 void AMainCharacter::Shoot()
 {
-	if(HealthComponent->IsDead())
+	if(HealthComponent->IsDead() || !Weapon->GetCanShoot())
 	{
 		return;
 	}

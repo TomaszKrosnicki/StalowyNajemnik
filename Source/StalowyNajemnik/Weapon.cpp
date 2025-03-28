@@ -26,12 +26,6 @@ AWeapon::AWeapon()
 
 void AWeapon::TriggerWeapon()
 {
-	// TO DO:
-	// - Muzzle Flash Particle Effect xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	// - Delay między możliwymi strzałami xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	// - przerobic wyciąganie pocisków na object pooling pattern xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-	// - sprawdzanie czy korzystamy z amunicji oraz wystrzelenie jesli mamy amunicje
-	// - dzwięk wystrzału xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	if (bCanShoot == false) { return; }
 	bCanShoot = false;
 	GetWorldTimerManager().SetTimer(ShootingTimer, this, &AWeapon::ResetCanShoot, ShootingDelay);
@@ -50,7 +44,6 @@ void AWeapon::TriggerWeapon()
 	default:
 		break;
 	}
-	
 }
 
 void AWeapon::SwitchCurrentEnergyType(int Value)
@@ -73,6 +66,13 @@ void AWeapon::SwitchCurrentEnergyType(int Value)
 	default:
 		break;
 	}
+	
+	UGameplayStatics::SpawnSoundAttached(SwitchSound, ProjectileSpawnPoint, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator);
+}
+
+bool AWeapon::GetCanShoot() const
+{
+	return bCanShoot;
 }
 
 // Called when the game starts or when spawned
