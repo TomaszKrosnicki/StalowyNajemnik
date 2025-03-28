@@ -5,6 +5,8 @@
 #include "ProjectileHitInterface.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "MainCharacter.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -31,6 +33,13 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 
+	WeaponOwner = GetOwner();
+	OwnerCharacter = Cast<AMainCharacter>(WeaponOwner);
+	if (OwnerCharacter != nullptr)
+	{
+		OwnerCharacter->GetCapsuleComponent()->IgnoreActorWhenMoving(this, true);
+		OwnerCharacter->GetCapsuleComponent()->MoveIgnoreActors.Add(this);
+	}
 	ProjectileCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
 	IgnoreOwnerCollision();
 	ProjectileMovementComponent->MaxSpeed = Speed;
@@ -40,10 +49,11 @@ void AProjectile::BeginPlay()
 
 void AProjectile::IgnoreOwnerCollision()
 {
-	AActor* OwnerActor = GetOwner();
-	if (OwnerActor != nullptr)
+	if (WeaponOwner != nullptr)
 	{
-		ProjectileCollider->IgnoreActorWhenMoving(OwnerActor, true);
+		SetOwner(WeaponOwner);
+		ProjectileCollider->IgnoreActorWhenMoving(WeaponOwner, true);
+		ProjectileCollider->MoveIgnoreActors.Add(WeaponOwner);
 	}
 }
 
@@ -72,6 +82,7 @@ void AProjectile::ActivateProjectileAtLocation(FVector SpawnLocation, FRotator S
 	SetActorEnableCollision(true);
 	SetActorTickEnabled(true);
 	ProjectileMovementComponent->Velocity = MovementDirection * Speed;
+	IgnoreOwnerCollision();
 }
 
 void AProjectile::DeactivateProjectile()
@@ -81,6 +92,7 @@ void AProjectile::DeactivateProjectile()
 	SetActorEnableCollision(false);
 	SetActorTickEnabled(false);
 	ProjectileMovementComponent->Velocity = FVector::ZeroVector;
+	IgnoreOwnerCollision();
 }
 
 bool AProjectile::GetInUse() const

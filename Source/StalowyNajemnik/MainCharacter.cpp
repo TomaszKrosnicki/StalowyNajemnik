@@ -71,9 +71,10 @@ void AMainCharacter::BeginPlay()
 
 	PlayerController = Cast<APlatformerPlayerController>(GetController());
 
-	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnParams);
 	Weapon->SetActorRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
-	Weapon->SetOwner(this);
 	AttachWeaponToSocket(LegSocketName, LegSocketTransformOffset, LegSocketRotationOffset);
 }
 

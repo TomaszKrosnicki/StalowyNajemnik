@@ -25,7 +25,7 @@ protected:
 	void IgnoreOwnerCollision();
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = "Sphere Collider")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Sphere Collider")
 	USphereComponent* ProjectileCollider;
 
 	UPROPERTY(EditDefaultsOnly, Category = "EnergyType")
@@ -48,6 +48,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	bool bInUse = false;
+
+	AActor* WeaponOwner;
+	class AMainCharacter* OwnerCharacter;
 
 	UFUNCTION()
 	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
